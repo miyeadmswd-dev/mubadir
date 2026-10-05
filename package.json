@@ -1,0 +1,13 @@
+{
+  "name": "mobader-tu-platform",
+  "version": "1.0.0",
+  "description": "منصة مبادر - الأندية والفعاليات الجامعية",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^5.1.0",
+    "sqlite3": "^5.1.7"
+  }
+}

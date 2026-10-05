@@ -1,0 +1,742 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>منصة مبادر - الأندية والفعاليات الجامعية</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="login-bg">
+
+<div id="toastContainer" class="toast-container"></div>
+
+<!-- ================= تسجيل الدخول ================= -->
+
+<div id="loginSection" class="card">
+
+    <div class="login-logo">
+        <img src="images/logo2.png" alt="منصة مبادر">
+    </div>
+
+    <h2>تسجيل الدخول - منصة مبادر</h2>
+
+    <form id="loginForm">
+
+        <div class="input-group">
+            <label>البريد الإلكتروني الجامعي</label>
+
+            <input
+                type="email"
+                id="email"
+                placeholder="student@st.ut.edu.sa"
+                required
+            >
+        </div>
+
+        <div class="input-group">
+
+            <label>كلمة المرور</label>
+
+            <input
+                type="password"
+                id="password"
+                placeholder="أدخل كلمة المرور"
+                required
+            >
+
+        </div>
+
+        <button
+            type="submit"
+            class="btn"
+        >
+            دخول
+        </button>
+
+        <p id="error-msg" class="error"></p>
+
+    </form>
+
+    <button
+        class="secondary-btn"
+        onclick="openRegisterModal()"
+    >
+        إنشاء حساب جديد
+    </button>
+
+</div>
+
+
+<!-- ================= Navbar ================= -->
+
+<div id="mainNavbar" class="navbar hidden">
+
+    <div class="nav-brand">
+
+        <img
+            src="images/logo2.png"
+            alt="شعار منصة مبادر"
+            class="nav-logo-img"
+        >
+
+        <span>منصة مبادر</span>
+
+    </div>
+
+    <div class="nav-controls">
+
+        <button
+            class="nav-btn"
+            onclick="openProfileModal()"
+        >
+            👤 الملف الشخصي
+        </button>
+
+        <button
+            class="nav-btn"
+            onclick="toggleDarkMode()"
+        >
+            🌙/☀️ الوضع
+        </button>
+
+        <button
+            id="adminButton"
+            class="nav-btn hidden"
+            onclick="openAdmin()"
+        >
+            ⚙️ لوحة التحكم
+        </button>
+
+        <button
+            class="nav-btn logout-btn"
+            onclick="logout()"
+        >
+            تسجيل خروج
+        </button>
+
+    </div>
+
+</div>
+
+
+<!-- ================= الصفحة الرئيسية ================= -->
+
+<div
+    id="homeSection"
+    class="hidden container-wide"
+>
+
+    <header class="main-header">
+
+        <div>
+
+            <h1>مرحباً بكِ في مبادر</h1>
+
+            <p>
+               
+                استكشفي الأندية والفعاليات الجامعية وشاركي في الأنشطة.
+                اعداد فريق ويبيل 
+                ميعاد المظيبري
+                العنود البلوي 
+                ريما الحربي
+                ريماس الحربي 
+            </p>
+
+        </div>
+
+        <div class="reward-banner">
+
+            <span>
+                نجومك:
+                <span id="starCount">0</span>
+                / 10
+            </span>
+
+            <div
+                class="stars-container"
+                id="starsDisplay"
+            >
+
+                <span class="star">★</span>
+                <span class="star">★</span>
+                <span class="star">★</span>
+                <span class="star">★</span>
+                <span class="star">★</span>
+                <span class="star">★</span>
+                <span class="star">★</span>
+                <span class="star">★</span>
+                <span class="star">★</span>
+                <span class="star">★</span>
+
+            </div>
+
+        </div>
+
+    </header>
+
+
+    <div class="welcome-user">
+
+        <h3>
+            أهلاً
+            <span id="welcomeUserName"></span>
+            👋🏻
+        </h3>
+
+        <p>
+            شاركي في الأنشطة الجامعية واجمعي النجوم والمكافآت.
+        </p>
+
+    </div>
+
+
+    <div class="selection-grid">
+
+        <div
+            class="big-box"
+            onclick="goToSection('clubs')"
+        >
+
+            <div class="home-icon">🎓</div>
+
+            <h3>الأندية الطلّابية</h3>
+
+            <p>
+                تصفحي الأندية الجامعية واختاري النادي المناسب لكِ.
+            </p>
+
+        </div>
+
+
+        <div
+            class="big-box"
+            onclick="goToSection('events')"
+        >
+
+            <div class="home-icon">🎪</div>
+
+            <h3>الفعاليات الجامعية</h3>
+
+            <p>
+                استعرضي الفعاليات واحجزي مقعدك أو وقت حضورك.
+            </p>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- ================= الأندية ================= -->
+
+<div
+    id="clubsSection"
+    class="hidden container-wide"
+>
+
+    <header class="main-header">
+
+        <div>
+            <h1>الأندية الطلّابية</h1>
+            <p>اختاري النادي الذي يناسب اهتماماتك.</p>
+        </div>
+
+        <button
+            class="back-btn"
+            onclick="goHome()"
+        >
+            الرجوع للرئيسية
+        </button>
+
+    </header>
+
+
+    <div
+        id="clubsContainer"
+        class="list-container"
+    ></div>
+
+</div>
+
+
+<!-- ================= الفعاليات ================= -->
+
+<div
+    id="eventsSection"
+    class="hidden container-wide"
+>
+
+    <header class="main-header">
+
+        <div>
+            <h1>فعاليات الكليات الجامعية</h1>
+            <p>اكتشفي الفعاليات واحجزي مقعدك.</p>
+        </div>
+
+        <button
+            class="back-btn"
+            onclick="goHome()"
+        >
+            الرجوع للرئيسية
+        </button>
+
+    </header>
+
+
+    <div class="filter-bar">
+
+        <input
+            type="text"
+            id="eventSearchInput"
+            placeholder="ابحثي عن اسم الفعالية أو الكلية..."
+            onkeyup="filterEvents()"
+        >
+
+        <select
+            id="eventDayFilter"
+            onchange="filterEvents()"
+        >
+
+            <option value="">
+                جميع الأيام
+            </option>
+
+            <option value="الأحد">الأحد</option>
+            <option value="الإثنين">الإثنين</option>
+            <option value="الثلاثاء">الثلاثاء</option>
+            <option value="الأربعاء">الأربعاء</option>
+            <option value="الخميس">الخميس</option>
+
+        </select>
+
+    </div>
+
+
+    <div
+        class="events-grid"
+        id="eventsGridContainer"
+    ></div>
+
+</div>
+
+
+<!-- ================= نافذة التسجيل ================= -->
+
+<div
+    id="registerModal"
+    class="modal hidden"
+>
+
+    <div class="modal-content">
+
+        <h3 class="modal-title">
+            إنشاء حساب جديد
+        </h3>
+
+        <div class="input-group">
+
+            <label>الاسم الكامل</label>
+
+            <input
+                id="registerName"
+                type="text"
+                placeholder="اكتبي اسمك"
+            >
+
+        </div>
+
+
+        <div class="input-group">
+
+            <label>الرقم الجامعي</label>
+
+            <input
+                id="registerStudentId"
+                type="text"
+                placeholder="الرقم الجامعي"
+            >
+
+        </div>
+
+
+        <div class="input-group">
+
+            <label>البريد الجامعي</label>
+
+            <input
+                id="registerEmail"
+                type="email"
+                placeholder="student@st.ut.edu.sa"
+            >
+
+        </div>
+
+
+        <div class="input-group">
+
+            <label>التخصص</label>
+
+            <select id="registerMajor">
+
+                <option>علوم حاسب</option>
+                <option>هندسة</option>
+                <option>طب</option>
+                <option>صيدلة</option>
+                <option>تصميم</option>
+                <option>قانون</option>
+                <option>رياضيات</option>
+                <option>تخصصات أخرى</option>
+
+            </select>
+
+        </div>
+
+
+        <div class="input-group">
+
+            <label>كلمة المرور</label>
+
+            <input
+                id="registerPassword"
+                type="password"
+                placeholder="كلمة المرور"
+            >
+
+        </div>
+
+
+        <button
+            class="btn-book"
+            onclick="registerUser()"
+        >
+            إنشاء الحساب
+        </button>
+
+        <button
+            class="close-btn"
+            onclick="closeModals()"
+        >
+            إغلاق
+        </button>
+
+    </div>
+
+</div>
+
+
+<!-- ================= تفاصيل النادي ================= -->
+
+<div
+    id="clubModal"
+    class="modal hidden"
+>
+
+    <div class="modal-content">
+
+        <h3
+            id="clubModalTitle"
+            class="modal-title"
+        >
+            النادي
+        </h3>
+
+        <p>
+            <strong>المشرفة:</strong>
+            <span id="clubSupervisor"></span>
+        </p>
+
+        <p>
+            <strong>هدف النادي:</strong>
+        </p>
+
+        <p
+            id="clubModalDesc"
+            class="gray-info"
+        ></p>
+
+
+        <div class="input-group">
+
+            <label>
+                ما هو هدفك من دخول النادي؟
+            </label>
+
+            <textarea
+                id="userGoal"
+                placeholder="اكتبي هدفك..."
+            ></textarea>
+
+        </div>
+
+
+        <button
+            class="btn-book"
+            onclick="confirmClubRegistration()"
+        >
+            تأكيد التسجيل (+1 نجمة)
+        </button>
+
+        <button
+            class="close-btn"
+            onclick="closeModals()"
+        >
+            إغلاق
+        </button>
+
+    </div>
+
+</div>
+
+
+<!-- ================= تفاصيل الفعالية ================= -->
+
+<div
+    id="eventDetailsModal"
+    class="modal hidden"
+>
+
+    <div class="modal-content">
+
+        <h3
+            id="eventDetailsTitle"
+            class="modal-title"
+        ></h3>
+
+        <p>
+            <strong>الكلية:</strong>
+            <span id="eventDetailsCollege"></span>
+        </p>
+
+        <p>
+            <strong>اليوم:</strong>
+            <span id="eventDetailsDay"></span>
+        </p>
+
+        <p>
+            <strong>المدة:</strong>
+            <span id="eventDetailsDuration"></span>
+        </p>
+
+        <p>
+            <strong>المكان:</strong>
+            <span id="eventDetailsLocation"></span>
+        </p>
+
+        <p
+            id="eventDetailsDescription"
+            class="gray-info"
+        ></p>
+
+        <button
+            id="eventDetailsBookButton"
+            class="btn-book"
+        >
+            حجز
+        </button>
+
+        <button
+            class="close-btn"
+            onclick="closeModals()"
+        >
+            إغلاق
+        </button>
+
+    </div>
+
+</div>
+
+
+<!-- ================= المسرح ================= -->
+
+<div
+    id="theaterModal"
+    class="modal hidden"
+>
+
+    <div class="modal-content theater-content">
+
+        <h3>
+            مسرحية كلية الطب - حجز المقاعد
+        </h3>
+
+        <p id="theaterStatusText">
+            المقاعد المتاحة
+        </p>
+
+        <div
+            class="screen"
+        >
+            المسرح
+        </div>
+
+        <div
+            class="seats-grid"
+            id="theaterSeatsContainer"
+        ></div>
+
+        <button
+            class="btn-book"
+            onclick="confirmTheaterBooking()"
+        >
+            تأكيد حجز المقاعد
+        </button>
+
+        <button
+            class="close-btn"
+            onclick="closeModals()"
+        >
+            إغلاق
+        </button>
+
+    </div>
+
+</div>
+
+
+<!-- ================= الوقت ================= -->
+
+<div
+    id="timeModal"
+    class="modal hidden"
+>
+
+    <div class="modal-content">
+
+        <h3 id="modalEventTitle">
+            حجز وقت الفعالية
+        </h3>
+
+        <div class="input-group">
+
+            <label>
+                اختر الفترة المناسبة:
+            </label>
+
+            <select
+                id="timeSlotSelect"
+            >
+
+                <option>
+                    10:00 - 10:30 صباحاً
+                </option>
+
+                <option>
+                    10:30 - 11:00 صباحاً
+                </option>
+
+                <option>
+                    11:00 - 11:30 صباحاً
+                </option>
+
+                <option>
+                    11:30 - 12:00 ظهراً
+                </option>
+
+            </select>
+
+        </div>
+
+        <button
+            class="btn-book"
+            onclick="confirmTimeSlot()"
+        >
+            تأكيد الحجز (+1 نجمة)
+        </button>
+
+        <button
+            class="close-btn"
+            onclick="closeModals()"
+        >
+            إغلاق
+        </button>
+
+    </div>
+
+</div>
+
+
+<!-- ================= الملف الشخصي ================= -->
+
+<div
+    id="profileModal"
+    class="modal hidden"
+>
+
+    <div class="modal-content">
+
+        <h3 class="modal-title">
+            الملف الشخصي
+        </h3>
+
+        <div class="profile-box">
+
+            <p>
+                <strong>الاسم:</strong>
+                <span id="profileName"></span>
+            </p>
+
+            <p>
+                <strong>الرقم الجامعي:</strong>
+                <span id="profileStudentId"></span>
+            </p>
+
+            <p>
+                <strong>البريد الإلكتروني:</strong>
+                <span id="profileEmail"></span>
+            </p>
+
+            <p>
+                <strong>التخصص:</strong>
+                <span id="profileMajor"></span>
+            </p>
+
+            <p>
+                <strong>النقاط:</strong>
+                <span id="profilePoints">0</span>
+            </p>
+
+            <p>
+                <strong>النجوم:</strong>
+                <span id="profileStars">0</span>
+            </p>
+
+        </div>
+
+
+        <hr>
+
+        <h4>
+            الأندية المسجل بها
+        </h4>
+
+        <div id="profileClubsList"></div>
+
+
+        <h4>
+            حجوزات الفعاليات
+        </h4>
+
+        <div id="profileEventsList"></div>
+
+
+        <button
+            class="close-btn"
+            onclick="closeModals()"
+        >
+            إغلاق
+        </button>
+
+    </div>
+
+</div>
+
+
+<script src="script.js"></script>
+
+</body>
+</html>

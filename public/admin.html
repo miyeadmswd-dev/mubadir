@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        لوحة تحكم مبادر
+    </title>
+
+    <link
+        rel="stylesheet"
+        href="admin.css"
+    >
+
+</head>
+
+<body>
+
+<header class="admin-header">
+
+    <div>
+
+        <h1>
+            ⚙️ لوحة تحكم منصة مبادر
+        </h1>
+
+        <p>
+            إدارة الأندية والفعاليات والحجوزات
+        </p>
+
+    </div>
+
+    <div>
+
+        <button
+            onclick="location.href='index.html'"
+            class="back-button"
+        >
+            العودة للموقع
+        </button>
+
+        <button
+            onclick="adminLogout()"
+            class="logout-button"
+        >
+            تسجيل خروج
+        </button>
+
+    </div>
+
+</header>
+
+
+<main class="dashboard">
+
+    <section class="stats">
+
+        <div class="stat-card">
+
+            <span>
+                👩🏻‍🎓
+            </span>
+
+            <h2 id="usersCount">
+                0
+            </h2>
+
+            <p>
+                المستخدمون
+            </p>
+
+        </div>
+
+        <div class="stat-card">
+
+            <span>
+                🎓
+            </span>
+
+            <h2 id="clubsCount">
+                0
+            </h2>
+
+            <p>
+                الأندية
+            </p>
+
+        </div>
+
+        <div class="stat-card">
+
+            <span>
+                🎪
+            </span>
+
+            <h2 id="eventsCount">
+                0
+            </h2>
+
+            <p>
+                الفعاليات
+            </p>
+
+        </div>
+
+        <div class="stat-card">
+
+            <span>
+                🎟️
+            </span>
+
+            <h2 id="bookingsCount">
+                0
+            </h2>
+
+            <p>
+                الحجوزات
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <!-- إضافة نادي -->
+
+    <section class="admin-card">
+
+        <h2>
+            إضافة نادي جديد
+        </h2>
+
+        <div class="form-grid">
+
+            <input
+                id="clubName"
+                placeholder="اسم النادي"
+            >
+
+            <input
+                id="clubSupervisor"
+                placeholder="اسم المشرفة"
+            >
+
+            <input
+                id="clubDescription"
+                placeholder="وصف النادي"
+            >
+
+        </div>
+
+        <button
+            onclick="addClub()"
+            class="main-button"
+        >
+            إضافة النادي
+        </button>
+
+    </section>
+
+
+    <!-- إضافة فعالية -->
+
+    <section class="admin-card">
+
+        <h2>
+            إضافة فعالية جديدة
+        </h2>
+
+        <div class="form-grid">
+
+            <input
+                id="eventTitle"
+                placeholder="اسم الفعالية"
+            >
+
+            <input
+                id="eventCollege"
+                placeholder="الكلية"
+            >
+
+            <select id="eventDay">
+
+                <option>الأحد</option>
+                <option>الإثنين</option>
+                <option>الثلاثاء</option>
+                <option>الأربعاء</option>
+                <option>الخميس</option>
+
+            </select>
+
+            <input
+                id="eventDuration"
+                placeholder="المدة"
+                value="30 دقيقة"
+            >
+
+            <input
+                id="eventLocation"
+                placeholder="المكان"
+            >
+
+            <input
+                id="eventCapacity"
+                type="number"
+                placeholder="عدد المقاعد"
+                value="30"
+            >
+
+            <select id="eventType">
+
+                <option value="time">
+                    حجز وقت
+                </option>
+
+                <option value="seat">
+                    حجز مقاعد
+                </option>
+
+            </select>
+
+            <input
+                id="eventDescription"
+                placeholder="وصف الفعالية"
+            >
+
+        </div>
+
+        <button
+            onclick="addEvent()"
+            class="main-button"
+        >
+            إضافة الفعالية
+        </button>
+
+    </section>
+
+
+    <!-- الأندية -->
+
+    <section class="admin-card">
+
+        <h2>
+            إدارة الأندية
+        </h2>
+
+        <div
+            id="clubsTable"
+            class="table-container"
+        ></div>
+
+    </section>
+
+
+    <!-- الفعاليات -->
+
+    <section class="admin-card">
+
+        <h2>
+            إدارة الفعاليات
+        </h2>
+
+        <div
+            id="eventsTable"
+            class="table-container"
+        ></div>
+
+    </section>
+
+
+    <!-- المستخدمون -->
+
+    <section class="admin-card">
+
+        <h2>
+            المستخدمون
+        </h2>
+
+        <div
+            id="usersTable"
+            class="table-container"
+        ></div>
+
+    </section>
+
+
+    <!-- الحجوزات -->
+
+    <section class="admin-card">
+
+        <h2>
+            الحجوزات
+        </h2>
+
+        <div
+            id="bookingsTable"
+            class="table-container"
+        ></div>
+
+    </section>
+
+</main>
+
+
+<div
+    id="adminToast"
+    class="toast"
+></div>
+
+
+<script src="admin.js"></script>
+
+</body>
+</html>
